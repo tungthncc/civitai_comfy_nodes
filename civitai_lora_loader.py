@@ -53,7 +53,7 @@ class CivitAI_LORA_Loader:
             }
         }
 
-    RETURN_TYPES = ("MODEL", "CLIP")
+    RETURN_TYPES = ("MODEL", "CLIP", "STRING")
     FUNCTION = "load_lora"
 
     CATEGORY = "CivitAI/Loaders"
@@ -111,5 +111,6 @@ class CivitAI_LORA_Loader:
             print(f"{MSG_PREFIX}Loading LORA from disk: {lora_path}")
         
         model_lora, clip_lora = self.lora_loader.load_lora(model, clip, lora_name, strength_model, strength_clip)
+        trained_words = " ".join(civitai_model.trained_words)
 
-        return model_lora, clip_lora, { "extra_pnginfo": extra_pnginfo }
+        return model_lora, clip_lora, trained_words, { "extra_pnginfo": extra_pnginfo }
